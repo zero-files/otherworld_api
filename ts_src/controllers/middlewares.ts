@@ -16,7 +16,6 @@ export const authentication = (levelAuth:"user"|"readwrite"|"read") => {
             let requestData = jwtVerify(jwt)
             if(requestData === "error" || requestData === "expired") return res.status(403).json({error: "Forbidden", message: "The token provided is invalid or has expired"})
             
-            console.log(requestData.permissions, levelAuth)
             if(requestData.permissions === levelAuth) return next()
             else {
                 if(levelAuth === "read") return res.status(403).json({error: "Forbidden", message: "You need 'read' permissions to make this request"})

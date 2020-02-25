@@ -2,7 +2,7 @@ import Route from "./_Route";
 import {readdirSync, readFileSync} from "fs"
 import {resolve, join} from "path"
 
-const route = new Route("get", "/models", false)
+const route = new Route("get", "/models", undefined)
 
 const modelsPath:string = resolve("./ts_src/models")
 const models:string[] = readdirSync(modelsPath)

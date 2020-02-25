@@ -5,19 +5,25 @@
   "main": "src/index.js",
   "scripts": {
     "compile": "tsc && node .",
-    "dev": "nodemon -e ts --exec \"npm run compile\"",
+    "dev": "cross-env NODE_ENV=development nodemon -e ts --exec \"npm run compile\"",
     "start": "node ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "firebase-admin": "^8.9.2",
-    "helmet": "^3.21.2"
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/helmet": "0.0.45",
+    "@types/jsonwebtoken": "^8.3.7",
+    "cross-env": "^7.0.0",
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.2",
     "typescript": "^3.7.5"
   }

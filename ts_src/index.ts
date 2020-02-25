@@ -1,3 +1,4 @@
+if(process.env.NODE_ENV == "development") require("dotenv").config()
 import app from "./server/app"
 
 function main():Promise<boolean> {

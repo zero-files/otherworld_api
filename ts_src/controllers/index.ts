@@ -1,6 +1,6 @@
 import Route from "./_Route"
 
-const index = new Route("get", "/", false)
+const index = new Route("get", "/", undefined)
 index.setController((req, res) => {
     res.send("<h1>Index route</h1>")
 })

@@ -3,9 +3,17 @@ const APIRouter = require("../routes/APIRouter")
 const test = new APIRouter({
     method: "GET",
     path: "/test",
-    tierAuth: 0,
+    tierAuth: 1,
     description: "Ruta de pruebas",
-    fileName: __filename
+    parameters: [
+        {
+            name: "nombre",
+            type: "string",
+            description: "parametro de test",
+            isRequired: false
+        }
+    ],
+    filename: __filename
 })
 
 test.setContoller((req, res) => {

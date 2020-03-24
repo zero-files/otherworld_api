@@ -8,7 +8,7 @@ class APIRouter {
      * @param {{name:string, description:string, type:string, isRequired:boolean}[]} config.parameters Parámetros del body de la peticion
      * @param {number} config.tierAuth Nivel de autenticación de la ruta
      * @param {string} config.description Descripción de la ruta
-     * @param {string} config.fileName Nombre del archivo para referencia en github
+     * @param {string} config.filename Nombre del archivo para referencia en github
      */
     constructor(config){
         if(!config) config = {}
@@ -17,7 +17,7 @@ class APIRouter {
         this.parameters = config.parameters || []
         this.tierAuth = config.tierAuth || 0
         this.description = config.description || "A route"
-        this.fileName = config.fileName || "unknow.js"
+        this.filename = config.filename || "unknow.js"
         this.middlewares = []
         this.controller = null
     }

@@ -12,7 +12,7 @@ const reqreslog = (req, res, next) => {
  */
 const authentication = tier => (req, res, next) => {
     if(!tier || tier === 0) return next()
-    if(req.headers["authorization"]) return res.status(401).json({error: "Forbidden", message: "You must provide a token to get access to this route"})
+    if(!req.headers["authorization"]) return res.status(401).json({error: "Forbidden", message: "You must provide a token to get access to this route"})
     else {
         let jwt = req.headers["authorization"]
         /**@type {"error"|"expired"|APIPayload} */

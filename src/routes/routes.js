@@ -5,6 +5,7 @@ const APIRouter = require("./APIRouter")
 const router = Router()
 
 const apiroutes = readdirSync(path.resolve("./src/controllers"))
+const {authentication} = require("../controllers/middlewares")
 
 router.get("/", (req, res) => {
     res.send("<h1>Index route!</h1>")
@@ -20,7 +21,7 @@ const routing = () => new Promise(async res => {
         if(!(apiroute instanceof APIRouter)) continue
         if(process.env.NODE_ENV == "development") await APIRouter.check(apiroute)
         
-        router[apiroute.method.toLowerCase()](apiroute.path, apiroute.controller)
+        router[apiroute.method.toLowerCase()](apiroute.path, authentication(apiroute.tierAuth), apiroute.controller)
     }
     res(router)
 })

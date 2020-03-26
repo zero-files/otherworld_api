@@ -12,6 +12,8 @@ router.get("/", (req, res) => {
 })
 
 const routing = () => new Promise(async res => {
+    let autodoc = []
+
     for(let i = 0; i < apiroutes.length; i++){
         if(apiroutes[i] === "middlewares.js" || apiroutes[i].startsWith("_")) continue
         
@@ -21,9 +23,14 @@ const routing = () => new Promise(async res => {
         if(!(apiroute instanceof APIRouter)) continue
         if(process.env.NODE_ENV == "development") await APIRouter.check(apiroute)
         
+        autodoc.push(apiroute.getDoc())
+
         router[apiroute.method.toLowerCase()](apiroute.path, authentication(apiroute.tierAuth), apiroute.controller)
     }
-    res(router)
+
+    router.get("/autodocumentation", (req, res) => res.json({data: autodoc}))
+
+    return res(router)
 })
 
 module.exports = routing

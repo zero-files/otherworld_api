@@ -13,7 +13,7 @@ const test = new APIRouter({
             isRequired: false
         }
     ],
-    filename: __filename
+    filename: __filename.split("/").pop()
 })
 
 test.setContoller((req, res) => {

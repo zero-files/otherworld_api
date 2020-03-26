@@ -50,6 +50,33 @@ class APIRouter {
         this.middlewares.push(ctrl)
     }
 
+    /**
+     * Genera el objeto para la documentación
+     * @returns {{
+     *  method:string
+     *  path:string
+     *  description:string
+     *  tier:number
+     *  filename:string
+     *  parameters: {
+     *      name:string
+     *      description:string
+     *      type:string
+     *      isRequired:boolean
+     *  }[]
+     * }}
+     */
+    getDoc(){
+        return {
+            method: this.method,
+            path: this.path,
+            description: this.description,
+            tier: this.tierAuth,
+            filename: this.filename,
+            parameters: this.parameters
+        }
+    }
+
 }
 
 module.exports = APIRouter

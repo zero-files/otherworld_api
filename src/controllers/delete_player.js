@@ -7,7 +7,7 @@ const delete_player = new APIRouter({
     path: "/game/player/:id",
     tierAuth: 3,
     description: "Elimina un player según su id",
-    fileName: __filename.split("/").pop()
+    filename: __filename.split("/").pop()
 })
 
 delete_player.setContoller(async (req, res) => {

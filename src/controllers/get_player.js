@@ -7,7 +7,7 @@ const get_player = new APIRouter({
     path: "/game/player/:id",
     tierAuth: 3,
     description: "Obtiene un player según el ID",
-    fileName: __filename.split("/").pop()
+    filename: __filename.split("/").pop()
 })
 
 get_player.setContoller(async (req, res) => {

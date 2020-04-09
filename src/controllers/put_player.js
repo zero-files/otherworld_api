@@ -7,7 +7,7 @@ const put_player = new APIRouter({
     path: "/game/player/:id",
     tierAuth: 3,
     description: "Coloca un nuevo jugador en la base de datos a partir de un ID",
-    fileName: __filename.split("/").pop()
+    filename: __filename.split("/").pop()
 })
 
 put_player.setContoller(async (req, res) => {

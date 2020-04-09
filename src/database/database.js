@@ -26,18 +26,20 @@ const players = db.collection("players")
 
 const get = {
     /**
+     * Obtiene un jugador de la base de datos a partir de un id
      * @param {string} id ID del jugador
      * @returns {Promise<player>}
      */
-    player: id => players.doc(`${id}`).get().then(doc => doc.data()).catch(e => {console.log("a", e); throw e })
+    player: id => players.doc(`${id}`).get().then(doc => doc.data()).catch(e => { throw e })
 }
 
 const put = {
     /**
+     * Coloca un nuevo jugador en la base de datos a partir de un id
      * @param {string} id ID del jugador
      * @returns {Promise<player>}
      */
-    new_player: async id => {
+    player: async id => {
         /**@type {player} */
         let player = {
             playerid: id,
@@ -47,16 +49,21 @@ const put = {
                 y: 0
             }
         }
-        console.log("x")
+
         await players.doc(`${id}`).set(player)
-            .catch(e => { console.log(e);throw e })
+            .catch(e => { throw e })
         
         return player
     }
 }
 
 const del = {
-
+    /**
+     * Elimina un jugador de la base de datos a partir de un id
+     * @param {string} id ID del jugador
+     * @returns {Promise<player>}
+     */
+    player: id => players.doc(`${id}`).delete()
 }
 
 const check = {

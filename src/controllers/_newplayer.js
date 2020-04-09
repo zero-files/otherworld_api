@@ -7,7 +7,7 @@ const newplayer = new APIRouter({
     path: "/game/new_player",
     tierAuth: 3,
     description: "Crea un nuevo jugador a partir de un ID, retorna el jugador en cuestión.",
-    fileName: __filename.split("/").pop(),
+    filename: __filename.split("/").pop(),
     parameters: [
         {
             name: "playerid",
@@ -28,7 +28,7 @@ newplayer.setContoller(async (req, res) => {
         
     } catch (e) { return res.status(500).json(errors.db(e)) }
     if(playerExist === null) return res.status(500).json(errors.unexpected)
-    
+
     if(playerExist === true) return res.status(409).json({error: "Player already exists", message: `The player with the id "${playerid}" already exists.`})
 
     let player = null

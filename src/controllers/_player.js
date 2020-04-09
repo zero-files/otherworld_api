@@ -7,7 +7,7 @@ const player = new APIRouter({
     path: "/game/player",
     tierAuth: 3,
     description: "Obtiene la información de un jugador.",
-    fileName: __filename.split("/").pop()
+    filename: __filename.split("/").pop()
 })
 
 player.setContoller(async (req, res) => {
@@ -20,7 +20,7 @@ player.setContoller(async (req, res) => {
 
     } catch (e) { return res.status(500).json(errors.db(e)) } 
     if(player === null) return res.status(500).json(errors.unexpected)
-    
+
     if(!player) return res.status(200).json({error: "Player not found", message: `Player "${playerid}" not exists.`, data: { player: {}}})
 
     return res.status(200).json({message: "Player was found", data: { player }})

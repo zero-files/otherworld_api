@@ -7,6 +7,7 @@ const {reqreslog} = require("../controllers/middlewares")
 
 app.set("port", process.env.PORT || 3000)
 
+app.disable('x-powered-by')
 app.use(helmet())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())

@@ -6,7 +6,7 @@ const get_player = new APIRouter({
     method: "GET",
     path: "/game/player/:id",
     tierAuth: 3,
-    description: "Obtiene un player según el ID",
+    description: "Obtiene un jugador a partir de un ID",
     filename: __filename.split("/").pop()
 })
 

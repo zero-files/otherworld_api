@@ -6,7 +6,7 @@ const put_player = new APIRouter({
     method: "PUT",
     path: "/game/player/:id",
     tierAuth: 3,
-    description: "Coloca un nuevo jugador en la base de datos a partir de un ID",
+    description: "Crea un nuevo jugador a partir de un ID, retorna el jugador en cuestión.",
     filename: __filename.split("/").pop()
 })
 

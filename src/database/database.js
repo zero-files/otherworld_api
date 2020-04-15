@@ -1,5 +1,6 @@
 const admin = require("firebase-admin")
 const key = require("./key")
+const {APIError} = require("../utils/errors")
 
 /**
  * @typedef {{
@@ -30,7 +31,9 @@ const get = {
      * @param {string} id ID del jugador
      * @returns {Promise<player>}
      */
-    player: id => players.doc(`${id}`).get().then(doc => doc.data()).catch(e => { throw e })
+    player: id => players.doc(`${id}`).get()
+        .then(doc => doc.data())
+        .catch(e => { throw new APIError(500, "database", e) }),
 }
 
 const put = {
@@ -51,8 +54,8 @@ const put = {
         }
 
         await players.doc(`${id}`).set(player)
-            .catch(e => { throw e })
-        
+            .catch(e => { throw new APIError(500, "database", e) })
+
         return player
     }
 }
@@ -64,10 +67,13 @@ const del = {
      * @returns {Promise<player>}
      */
     player: id => players.doc(`${id}`).delete()
+        .catch(e => { throw new APIError(500, "database", e) }),
 }
 
 const check = {
-    player_exist: id => players.where("playerid", "==", `${id}`).get().then(q => q.empty ? false : true)
+    player_exist: id => players.where("playerid", "==", `${id}`).get()
+        .then(q => q.empty ? false : true)
+        .catch(e => { throw new APIError(500, "database", e) }),
 }
 
 

@@ -36,7 +36,7 @@ class APIRouter {
 
     /**
      * Coloca el controlador a la ruta.
-     * @param {(req:express.Request, res:express.Response)=>void} ctrl 
+     * @param {(req:express.Request, res:express.Response, next:()=>void)=>void} ctrl 
      */
     setContoller(ctrl){
         this.controller = ctrl
@@ -44,7 +44,7 @@ class APIRouter {
 
     /**
      * Añade un middleware a la ruta.
-     * @param {(req:express.Request, res:express.Response, next:()=>void)=>void} ctrl
+     * @param {(req:express.Request, res:express.Response, next?:()=>void)=>void} ctrl
      */
     addMiddleware(ctrl){
         this.middlewares.push(ctrl)

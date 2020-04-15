@@ -1,5 +1,5 @@
 const APIRouter = require("../routes/APIRouter")
-const errors = require("../utils/errors")
+const {APIError} = require("../utils/errors")
 const {get, check} = require("../database/database")
 
 const get_player = new APIRouter({
@@ -10,20 +10,17 @@ const get_player = new APIRouter({
     filename: __filename.split("/").pop()
 })
 
-get_player.setContoller(async (req, res) => {
-    let {id} = req.params || {}
-    if(!id) return res.status(400).json({error: "id is undefined", message: `You must provide a player id, ${get_player.path}`})
-    
-    let player = null
-    try { 
-        player = await get.player(id)
+get_player.setContoller(async (req, res, next) => {
+    try {
+        let {id} = req.params || {}
+        if(!id) return res.status(400).json({error: "id is undefined", message: `You must provide a player id, ${get_player.path}`})
+        
+        let player = await get.player(id)
+        if(!player) return res.status(404).json({error: "Player not found", message: `Player "${id}" not exists.`})
 
-    } catch (e) { return res.status(500).json(errors.db(e)) } 
-    if(player === null) return res.status(500).json(errors.unexpected)
+        return res.status(200).json({message: "Player was found", data: { player }})
 
-    if(!player) return res.status(404).json({error: "Player not found", message: `Player "${id}" not exists.`})
-
-    return res.status(200).json({message: "Player was found", data: { player }})
+    } catch (e) { next(e) }
 })
 
 module.exports = get_player

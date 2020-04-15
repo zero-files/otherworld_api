@@ -1,5 +1,5 @@
 const APIRouter = require("../routes/APIRouter")
-const errors = require("../utils/errors")
+const {APIError} = require("../utils/errors")
 const {put, check} = require("../database/database")
 
 const put_player = new APIRouter({
@@ -10,27 +10,19 @@ const put_player = new APIRouter({
     filename: __filename.split("/").pop()
 })
 
-put_player.setContoller(async (req, res) => {
-    let {id} = req.params || {}
-    if(!id) return res.status(400).json({error: "id is undefined", message: `You must provide a player id, ${put_player.path}`})
-
-    let playerExist = null
+put_player.setContoller(async (req, res, next) => {
     try {
-        playerExist = await check.player_exist(id)
+        let {id} = req.params || {}
+        if(!id) return res.status(400).json({error: "id is undefined", message: `You must provide a player id, ${put_player.path}`})
+    
+        let = await check.player_exist(id)
+        if(playerExist === true) return res.status(409).json({error: "Player already exists", message: `The player with the id "${id}" already exists.`})
+    
+        let player = await put.player(id)
+    
+        return res.status(201).json({message: `Player ${id} has been created`, data: { player }})
         
-    } catch (e) { return res.status(500).json(errors.db(e)) }
-    if(playerExist === null) return res.status(500).json(errors.unexpected)
-
-    if(playerExist === true) return res.status(409).json({error: "Player already exists", message: `The player with the id "${id}" already exists.`})
-
-    let player = null
-    try {
-        player = await put.player(id)
-
-    } catch (e) { return res.status(500).json(errors.db(e)) }
-    if(player === null) return res.status(500).json(errors.unexpected)
-
-    return res.status(201).json({message: `Player ${id} has been created`, data: { player }})
+    } catch(e){ next(e) }
 })
 
 module.exports = put_player

@@ -26,7 +26,13 @@ const authentication = tier => (req, res, next) => {
     }
 }
 
+const error = (err, req, res, next) => {
+    console.log("error xd")
+    res.send("epa")
+}
+
 module.exports = {
     reqreslog,
-    authentication
+    authentication,
+    error
 }

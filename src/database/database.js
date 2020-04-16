@@ -1,6 +1,6 @@
 const admin = require("firebase-admin")
 const key = require("./key")
-const {APIError} = require("../utils/errors")
+const APIError = require("../routes/APIRouter")
 
 /**
  * @typedef {{

@@ -1,5 +1,6 @@
 const {jwtVerify, jwtSign} = require("../utils/crypt")
 const JWTKEY = process.env.JWTKEY
+const APIError = require("../routes/APIError")
 /**@typedef {{app_name:string, tier:number}} APIPayload */
 
 const reqreslog = (req, res, next) => {
@@ -26,9 +27,13 @@ const authentication = tier => (req, res, next) => {
     }
 }
 
+/**
+ * @param {APIError} err
+ */
 const error = (err, req, res, next) => {
-    console.log("error xd")
-    res.send("epa")
+    err.notify(`${req.url} -${req.method}`)
+    err.log()
+    return res.status(err.status_code).json(err.response)
 }
 
 module.exports = {

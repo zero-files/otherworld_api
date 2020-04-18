@@ -31,7 +31,12 @@ const authentication = tier => (req, res, next) => {
  * @param {APIError} err
  */
 const error = (err, req, res, next) => {
-    if(!(err instanceof APIError)) err = new APIError()
+    if(!(err instanceof APIError)) {
+        console.log("!-")
+        console.log(err.stack)
+        console.log("!-")
+        err = new APIError()
+    }
     err.notify(`${req.url} -${req.method}`)
     err.log()
     return res.status(err.status_code).json(err.response)

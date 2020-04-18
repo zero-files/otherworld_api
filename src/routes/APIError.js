@@ -17,7 +17,7 @@ class APIError extends Error {
     * 
     */
     constructor(status_code, response, message_error){
-        super(message_error)
+        super(message_error || "Undefined Error")
         if(response === "unexpected") response = {error: "Unexpected Error", message: "Something strange has happened in this request. Please try again later or contact the developer."}
         else if(response === "database") response = {error: "Database error", message: "An error has occurred in the database, please try again."}
 

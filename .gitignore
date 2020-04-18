@@ -105,3 +105,4 @@ dist
 
 # Project ignores
 #src/database/
+test/

@@ -29,7 +29,7 @@ class BodyRequest {
     }
 
     is_empty(){
-        return Object.keys(this).length ? true : false
+        return Object.keys(this).length ? false : true
     }
 
     get parameters(){

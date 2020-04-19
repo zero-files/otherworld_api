@@ -34,6 +34,9 @@ const get = {
     player: id => players.doc(`${id}`).get()
         .then(doc => doc.data())
         .catch(e => { throw new APIError(500, "database", e) }),
+    players: () => players.get()
+        .then(q => q.docs.map(doc => doc.data()))
+        .catch(e => { throw new APIError(500, "database", e) }),
 }
 
 const put = {

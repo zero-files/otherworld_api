@@ -9,7 +9,7 @@ class BodyRequest {
         })
     }
 
-    clear_null(){
+    clear_nulls(){
         Object.keys(this).forEach(parameter => {
             if(this[parameter] === null) delete this[parameter]
         })

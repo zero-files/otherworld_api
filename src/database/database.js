@@ -70,6 +70,10 @@ const del = {
         .catch(e => { throw new APIError(500, "database", e) }),
 }
 
+const patch = {
+    
+}
+
 const check = {
     player_exist: id => players.where("playerid", "==", `${id}`).get()
         .then(q => q.empty ? false : true)
@@ -81,5 +85,6 @@ module.exports = {
     get,
     put,
     del,
-    check
+    patch,
+    check,
 }

@@ -1,5 +1,5 @@
 const APIRouter = require("../routes/APIRouter")
-const APIError = require("../routes/APIError")
+//const APIError = require("../routes/APIError")
 const {put, check} = require("../database/database")
 
 const put_player = new APIRouter({

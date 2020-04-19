@@ -71,7 +71,13 @@ const del = {
 }
 
 const patch = {
-    
+    /**
+     * Actualiza la información de un jugador
+     * @param {string} id ID del jugador
+     * @param {player} data nueva información del jugador
+     */
+    player: (id, data) => players.doc(`${id}`).set(data, {merge:true})
+        .catch(e => { throw new APIError(500, "database", e) }),
 }
 
 const check = {

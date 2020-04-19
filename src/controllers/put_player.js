@@ -15,8 +15,8 @@ put_player.setContoller(async (req, res, next) => {
         let {id} = req.params || {}
         if(!id) return res.status(400).json({error: "id is undefined", message: `You must provide a player id, ${put_player.path}`})
     
-        let = await check.player_exist(id)
-        if(playerExist === true) return res.status(409).json({error: "Player already exists", message: `The player with the id "${id}" already exists.`})
+        let player_exist = await check.player_exist(id)
+        if(player_exist === true) return res.status(409).json({error: "Player already exists", message: `The player with the id "${id}" already exists.`})
     
         let player = await put.player(id)
     
